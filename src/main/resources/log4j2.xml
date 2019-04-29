@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xml>
+<!-- 设置log4j2的自身log级别为warn -->
+<!-- OFF > FATAL > ERROR > WARN > INFO > DEBUG > TRACE > ALL -->
+<configuration status="WARN" monitorInterval="30">
+	<!--全局属性 -->
+	<Properties>
+		<Property name="LOG_PATH">${sys:user.home}/logs</Property>
+		<Property name="PATTERN_LAYOUT">[%d{HH:mm:ss.SSS}] [%p] - %l - %m%n</Property>
+	</Properties>
+	<appenders>
+		<console name="Console" target="SYSTEM_OUT">
+			<PatternLayout pattern="${PATTERN_LAYOUT}" />
+		</console>
+
+		<RollingFile name="RollingFileInfo"
+			fileName="${LOG_PATH}/info.log"
+			filePattern="${LOG_PATH}/$${date:yyyy-MM}/info-%d{yyyy-MM-dd}-%i.log">
+			<Filters>
+				<ThresholdFilter level="INFO" />
+				<ThresholdFilter level="WARN" onMatch="DENY" onMismatch="NEUTRAL" />
+			</Filters>
+			<PatternLayout pattern="${PATTERN_LAYOUT}" />
+			<Policies>
+				<TimeBasedTriggeringPolicy />
+				<SizeBasedTriggeringPolicy size="100 MB" />
+			</Policies>
+		</RollingFile>
+
+		<RollingFile name="RollingFileWarn"
+			fileName="${LOG_PATH}/warn.log"
+			filePattern="${LOG_PATH}/$${date:yyyy-MM}/warn-%d{yyyy-MM-dd}-%i.log">
+			<Filters>
+				<ThresholdFilter level="WARN" />
+				<ThresholdFilter level="ERROR" onMatch="DENY" onMismatch="NEUTRAL" />
+			</Filters>
+			<PatternLayout pattern="${PATTERN_LAYOUT}" />
+			<Policies>
+				<TimeBasedTriggeringPolicy />
+				<SizeBasedTriggeringPolicy size="100 MB" />
+			</Policies>
+		</RollingFile>
+
+		<RollingFile name="RollingFileError"
+			fileName="${LOG_PATH}/error.log"
+			filePattern="${LOG_PATH}/$${date:yyyy-MM}/error-%d{yyyy-MM-dd}-%i.log">
+			<ThresholdFilter level="ERROR" />
+			<PatternLayout pattern="${PATTERN_LAYOUT}" />
+			<Policies>
+				<TimeBasedTriggeringPolicy />
+				<SizeBasedTriggeringPolicy size="100 MB" />
+			</Policies>
+		</RollingFile>
+	</appenders>
+
+	<loggers>
+		<!--过滤掉spring和mybatis的一些无用的DEBUG信息 -->
+		<asyncLogger name="org.springframework" level="INFO"></asyncLogger>
+		<asyncLogger name="org.mybatis" level="INFO"></asyncLogger>
+		<asyncRoot level="all">
+			<appender-ref ref="Console" />
+			<appender-ref ref="RollingFileInfo" />
+			<appender-ref ref="RollingFileWarn" />
+			<appender-ref ref="RollingFileError" />
+		</asyncRoot>
+	</loggers>
+
+</configuration>

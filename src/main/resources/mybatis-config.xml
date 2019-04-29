@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<environments default="development">
+		<environment id="development">
+			<transactionManager type="JDBC" />
+			<dataSource type="com.example.demo.util.HikariFactory"></dataSource>
+		</environment>
+	</environments>
+	<mappers>
+		<!-- <package name="com.example.demo.dao" /> -->
+		<!-- <mapper class="com.example.demo.dao.userObjMapper"/> <mapper class="com.example.demo.dao.collectionObjMapper"/> -->
+		<mapper resource="mybatis/UserMapper.xml" />
+		<mapper resource="mybatis/ArticleMapper.xml" />
+		<mapper resource="mybatis/ArticleCommentMapper.xml" />
+		<mapper resource="mybatis/ArticleTypeMapper.xml" />
+	</mappers>
+</configuration>

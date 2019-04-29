@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="static/images/favicon.png" rel="shortcut icon" type="image/png" />
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<link rel="stylesheet" href="static/css/bootstrap-table.min.css">
+	<link rel="stylesheet" href="static/css/bootstrap-editable.css">
+	<link rel="stylesheet" href="static/css/fileinput.min.css">
+	<link rel="stylesheet" href="static/font-awesome/css/fontawesome.min.css">
+	<link rel="stylesheet" href="static/css/bootstrap-datetimepicker.min.css">
+	<link rel="stylesheet" href="static/css/toastr.min.css">
+	<script type="text/javascript" src="static/js/jquery.min.js"></script>
+	<script type="text/javascript" src="static/js/popper.min.js"></script>
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+	<script type="text/javascript" src="static/js/toastr.min.js"></script>
+	<script type="text/javascript" src="static/js/bootstrap-datetimepicker.min.js"></script>
+	<script type="text/javascript" src="static/js/bootstrap-editable.min.js"></script>
+	<script type="text/javascript" src="static/js/bootstrap-table.min.js"></script>
+	<script type="text/javascript" src="static/js/bootstrap-table-editable.min.js"></script>
+	<script type="text/javascript" src="static/js/bootstrap-table-export.min.js"></script>
+	<script type="text/javascript" src="static/js/fileinput.min.js"></script>
+	<script type="text/javascript" src="static/js/template-web.min.js"></script>
+	<script type="text/javascript" src="static/js/table-export.min.js"></script>
+	<script type="text/javascript" src="static/js/xlsx.core.min.js"></script>
+	<script type="text/javascript" src="static/js/i18n/bootstrap-datetimepicker-zh-CN.js"></script>
+	<script type="text/javascript" src="static/js/i18n/bootstrap-fileinput-zh-CN.js"></script>
+	<script type="text/javascript" src="static/js/i18n/bootstrap-table-zh-CN.js"></script>
+	<script type="text/javascript" src="static/font-awesome/js/fontawesome.min.js"></script>
+	<script type="text/javascript" src="static/ckeditor/ckeditor.js"></script>
+	<title>登录</title>
+</head>
+<body>
+<div class="row">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <i class="fa fa-user"></i>&nbsp;&nbsp;用户管理
+        </div>
+        <div class="panel-body">
+			<div class="row">
+			    <div class="col-lg-12">
+			        <input type="button" style="margin-bottom: -65px; float: none;" class="btn btn-success col-lg-2" value="导入用户表" id="importPoint">
+			        <input type="button" style="margin-bottom: -65px; float: none;" class="btn btn-primary col-lg-2" value="加载用户表">
+			        <table id="table"></table>
+			    </div>
+			</div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">上传数据点表</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <input id="fileinput" name="file" type="file" class="file file-loading">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="upload" disabled tabindex="500" title="Upload selected files" class="btn btn-default fileinput-upload fileinput-upload-button">
+                    <i class="glyphicon glyphicon-upload"></i>
+                    <span class="hidden-xs">上传</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+
+    String.prototype.endWith = function (s) {
+        var d = this.length - s.length;
+        return (d >= 0 && this.lastIndexOf(s) == d)
+    };
+
+    var JsonExcel = [];
+
+    $("#upload").click(function () {
+        $.ajax({
+            url: "/user/upload",
+            method: "post",
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify(JsonExcel),
+            success: function () {
+                $('#updateModal').modal('hide');
+                toastr.info('点表导入成功！');
+            },
+            error: function () {
+                toastr.error('点表不标准, 无法识别！');
+            }
+        });
+        $("#fileinput").fileinput('clear').fileinput('unlock');
+        $("#fileinput").parent().siblings('.fileinput-remove').hide();
+        $("#upload").attr('disabled', true);
+    });
+
+    $('#fileinput').change(function(evt) {
+        var files = evt.target.files;
+
+        var fileReader = new FileReader();
+
+        fileReader.onload = function(ev) {
+            var Excel;
+            JsonExcel = [];
+            try {
+                Excel = XLSX.read(ev.target.result, {type: 'binary'}); // 以二进制流方式读取得到整份excel表格对象
+            } catch (e) {
+                toastr.error('读取Excel失败, 请检查文件类型!');
+                $("#upload").attr('disabled', true);
+                return;
+            }
+
+            // 遍历每张表读取
+            for (var index in Excel.Sheets) {
+                JsonExcel = JsonExcel.concat(XLSX.utils.sheet_to_json(Excel.Sheets[index]));
+            }
+
+            console.log(JsonExcel);
+            if(JsonExcel.length > 0 && files[0].name.endWith('.xlsx')){
+                $("#upload").attr('disabled', false);
+            }else{
+                $("#upload").attr('disabled', true);
+            }
+        };
+
+        // 以二进制方式打开文件
+        fileReader.readAsBinaryString(files[0]);
+    });
+
+    $("#importPoint").click(function () {
+        $('#updateModal').modal('show');
+    })
+
+    $("#fileinput").fileinput({
+        language: 'zh', //设置语言
+        uploadUrl: "/user/upload",
+        maxFileCount: 1,
+        required: true,
+        autoReplace: true,
+        showUpload: false,
+        allowedFileExtensions: ['xlsx'],
+        layoutTemplates:{
+            actionDelete:'',
+            actionUpload:''
+        },
+    }).on('fileclear', function(event) {
+        $("#upload").attr('disabled', true);
+    });;
+
+    $('#table').bootstrapTable({
+        locale: 'zh-CN',
+        url: "/demo/user",
+        method: "get",
+        contentType: "application/json; charset=utf-8",
+        pagination: true,
+        search: true,
+        showRefresh: true,
+        showColumns: true,
+        showExport: true,
+        exportDataType: 'all',
+        exportTypes: [ 'json', 'xml', 'png', 'csv', 'txt', 'sql', 'doc', 'excel', 'xlsx', 'pdf'],
+        columns: [
+            {
+                field: 'id',
+                title: '用户ID',
+                sortable: true,
+                visible: false
+            },
+            {
+                field: 'nickName',
+                title: '用户昵称',
+                sortable: true,
+                editable: {
+                    type: 'text',
+                    validate: function (value) {
+                        if ($.trim(value) == '') {
+                            return '用户昵称不能为空!';
+                        }
+                    }
+                }
+            },
+            {
+                field: 'email',
+                title: '邮箱地址',
+                sortable: true,
+                editable: {
+                    type: 'text',
+                    validate: function (value) {
+                        if ($.trim(value) == '') {
+                            return '邮箱地址不能为空!';
+                        }
+                    }
+                }
+            },
+            {
+                field: 'mobilePhone',
+                title: '手机号',
+                sortable: true,
+                editable: {
+                    type: 'text',
+                    validate: function (value) {
+                        if ($.trim(value) == '') {
+                            return '手机号不能为空!';
+                        }
+                    }
+                }
+            },
+            {
+                field: 'address',
+                title: '详细地址',
+                sortable: true,
+                editable: {
+                    type: 'text',
+                    validate: function (value) {
+                        if ($.trim(value) == '') {
+                            return '详细地址不能为空!';
+                        }
+                    }
+                }
+            },
+            {
+                title: '操作',
+                width: 50,
+                align: 'center',
+                valign: 'middle',
+                formatter: function (value, row, index) {
+                    return "<a href='#' class='btn btn-xs red' onclick=\"DeleteById(" + row.id +  ")\" title='删除'><span class='glyphicon glyphicon-remove'></span></a>";
+                }
+            }
+        ],
+        onEditableSave: function (field, row, oldValue, $el) {
+            $.ajax({
+                url: "/demo/user",
+                method: "put",
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify(row),
+                success: function () {
+                    toastr.info('修改成功!');
+                }
+            });
+        }
+    });
+
+    function DeleteById(target) {
+        $.ajax({
+            url: "/demo/user",
+            method: "delete",
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify({
+                id: target
+            }),
+            success: function () {
+                toastr.info('删除成功!');
+                $('#table').bootstrapTable('refresh');
+            }
+        });
+    }
+</script>
+</body>
+</html>

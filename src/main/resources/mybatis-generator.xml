@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+
+<!-- 以下属性可用于加载配置项或者配置文件，在整个配置文件中可以使用${propertyKey}来引用配置项，注意两个属性只能选择一个：
+    resource：在classpath路径下引用
+    url：以url的方式引用
+	 此外，如果使用了mybatis-generator-maven-plugin，那么在pom.xml中定义的properties都可以直接在generatorConfig.xml中使用：
+    <properties resource="" url=""/> 
+-->
+
+<!-- 配置生成器 -->
+<generatorConfiguration>
+    <!-- classPathEntry标签的location属性指明了mybatis-generator需要额外加载的依赖包 -->
+    <classPathEntry location="C:\Users\ERIC\.m2\repository\mysql\mysql-connector-java\5.1.47\mysql-connector-java-5.1.47.jar"/>
+
+    <context id="mysql" targetRuntime="MyBatis3" defaultModelType="flat">
+        <!-- 生成的Java文件的编码 -->
+        <property name="modelOnly" value="true"/>
+        <!-- 生成的Java文件的编码 -->
+        <property name="javaFileEncoding" value="UTF-8"/>
+        <!-- 格式化java代码 -->
+        <property name="javaFormatter" value="org.mybatis.generator.api.dom.DefaultJavaFormatter"/>
+        <!-- 格式化XML代码 -->
+        <property name="xmlFormatter" value="org.mybatis.generator.api.dom.DefaultXmlFormatter"/>
+        <!-- beginningDelimiter和endingDelimiter：指明数据库的用于标记数据库对象名的符号，比如ORACLE就是双引号，MYSQL默认是`反引号； -->
+        <property name="beginningDelimiter" value="`"/>
+        <property name="endingDelimiter" value="`"/>
+
+        <!-- 插件 -->
+        <plugin type="org.mybatis.generator.plugins.SerializablePlugin"/>
+        <plugin type="org.mybatis.generator.plugins.ToStringPlugin"/>
+
+        <!-- 生成注释 -->
+        <commentGenerator>
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
+
+        <!-- JDBC连接 -->
+        <connectionFactory>
+			<property name="driverClass" value="com.mysql.jdbc.Driver"/>
+			<property name="connectionURL" value="jdbc:mysql://localhost:3308/demo"/>
+			<property name="userId" value="root"/>
+			<property name="password" value="LYY1996*"/>
+        </connectionFactory>
+
+        <!-- Java类型处理器
+			用于处理DB中的类型到Java中的类型的转换，默认使用JavaTypeResolverDefaultImpl；
+			  注意一点，默认会先尝试使用Integer、Long、Short等来对应DECIMAL和NUMERIC数据类型；
+        -->
+        <javaTypeResolver>
+            <!--
+                true：使用BigDecimal对应DECIMAL和 NUMERIC数据类型
+                false：默认
+                scale>0;length>18：使用BigDecimal；
+                scale=0;length[10,18]：使用Long；
+                scale=0;length[5,9]：使用Integer；
+                scale=0;length<5：使用Short；
+             -->
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+
+        <!-- Java实体类生成配置 -->
+        <javaModelGenerator targetPackage="com.example.demo.model" targetProject="src/main/java">
+            <!-- 自动为每一个生成的类创建一个构造方法 -->
+            <property name="constructorBased" value="false"/>
+
+            <!-- 在targetPackage的基础上，根据数据库的schema再生成一层package，最终生成的类放在这个package下，默认为false -->
+            <property name="enableSubPackages" value="true"/>
+
+            <!-- 是否创建一个不可变的类，如果为true，那么mybatis-generator会创建一个没有setter方法的类，否则是类似constructorBased的类 -->
+            <property name="immutable" value="false"/>
+
+            <!-- 设置一个根类, 如果设置了这个根类，那么生成的keyClass或者recordClass都会继承于这个类；
+				在Table的rootClass属性中可以覆盖该选项；
+				 注意：如果在key class或者record class中有与root class相同的属性，mybatis-generator就不会重新生成这些属性了，包括：
+				1、属性名相同     2、类型相同     3、有相同的getter/setter方法；
+				<property name="rootClass" value=""/>
+            -->
+
+            <!-- 设置是否在getter方法中，对String类型字段调用trim()方法 -->
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+
+        <!-- 生成SQL Mapper的XML文件生成器 -->
+        <sqlMapGenerator targetPackage="mybatis" targetProject="src/main/resources">
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+
+        <javaClientGenerator type="XMLMAPPER"
+                             targetPackage="com.example.demo.dao"
+                             targetProject="src/main/java">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+
+        <!-- 可以配置多个table，一起运行，完成后建议将其配置为不自动更新/生成实体类 -->
+        <table tableName="user"
+               domainObjectName="User"
+               enableCountByExample="false"
+               enableSelectByExample="false"
+               enableUpdateByExample="false"
+               enableDeleteByExample="false"
+               enableInsert="true"
+               enableDeleteByPrimaryKey="true"
+               enableSelectByPrimaryKey="true"
+               enableUpdateByPrimaryKey="true"/>
+
+        <table tableName="article"
+               domainObjectName="Article"
+               enableCountByExample="false"
+               enableSelectByExample="false"
+               enableUpdateByExample="false"
+               enableDeleteByExample="false"
+               enableInsert="true"
+               enableDeleteByPrimaryKey="true"
+               enableSelectByPrimaryKey="true"
+               enableUpdateByPrimaryKey="true"/>
+
+        <table tableName="article_type"
+               domainObjectName="ArticleType"
+               enableCountByExample="false"
+               enableSelectByExample="false"
+               enableUpdateByExample="false"
+               enableDeleteByExample="false"
+               enableInsert="true"
+               enableDeleteByPrimaryKey="true"
+               enableSelectByPrimaryKey="true"
+               enableUpdateByPrimaryKey="true"/>
+               
+        <table tableName="article_comment"
+               domainObjectName="ArticleComment"
+               enableCountByExample="false"
+               enableSelectByExample="false"
+               enableUpdateByExample="false"
+               enableDeleteByExample="false"
+               enableInsert="true"
+               enableDeleteByPrimaryKey="true"
+               enableSelectByPrimaryKey="true"
+               enableUpdateByPrimaryKey="true"/>
+
+    </context>
+</generatorConfiguration>
