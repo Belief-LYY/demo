@@ -95,16 +95,6 @@
         </javaClientGenerator>
 
         <!-- 可以配置多个table，一起运行，完成后建议将其配置为不自动更新/生成实体类 -->
-        <table tableName="user"
-               domainObjectName="User"
-               enableCountByExample="false"
-               enableSelectByExample="false"
-               enableUpdateByExample="false"
-               enableDeleteByExample="false"
-               enableInsert="true"
-               enableDeleteByPrimaryKey="true"
-               enableSelectByPrimaryKey="true"
-               enableUpdateByPrimaryKey="true"/>
 
         <table tableName="article"
                domainObjectName="Article"
@@ -139,5 +129,26 @@
                enableSelectByPrimaryKey="true"
                enableUpdateByPrimaryKey="true"/>
 
+        <table tableName="on_channel_http"
+               domainObjectName="ChannelHttp"
+               enableCountByExample="false"
+               enableSelectByExample="false"
+               enableUpdateByExample="false"
+               enableDeleteByExample="false"
+               enableInsert="true"
+               enableDeleteByPrimaryKey="true"
+               enableSelectByPrimaryKey="true"
+               enableUpdateByPrimaryKey="true"/>
+               
+        <table tableName="on_channel_sock"
+               domainObjectName="ChannelSock"
+               enableCountByExample="false"
+               enableSelectByExample="false"
+               enableUpdateByExample="false"
+               enableDeleteByExample="false"
+               enableInsert="true"
+               enableDeleteByPrimaryKey="true"
+               enableSelectByPrimaryKey="true"
+               enableUpdateByPrimaryKey="true"/>
     </context>
 </generatorConfiguration>

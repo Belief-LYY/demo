@@ -3,22 +3,22 @@ package com.example.demo.model;
 import java.io.Serializable;
 import java.util.Date;
 
-public class ArticleComment implements Serializable {
+public class ChannelHttp implements Serializable {
     private Integer id;
 
-    private Integer articleId;
+    private String address;
 
-    private Integer createBy;
+    private String method;
+
+    private String createBy;
 
     private Date createDate;
 
-    private Integer updateBy;
+    private String updateBy;
 
     private Date updateDate;
 
     private Boolean delFlag;
-
-    private String content;
 
     private static final long serialVersionUID = 1L;
 
@@ -30,20 +30,28 @@ public class ArticleComment implements Serializable {
         this.id = id;
     }
 
-    public Integer getArticleId() {
-        return articleId;
+    public String getAddress() {
+        return address;
     }
 
-    public void setArticleId(Integer articleId) {
-        this.articleId = articleId;
+    public void setAddress(String address) {
+        this.address = address == null ? null : address.trim();
     }
 
-    public Integer getCreateBy() {
+    public String getMethod() {
+        return method;
+    }
+
+    public void setMethod(String method) {
+        this.method = method == null ? null : method.trim();
+    }
+
+    public String getCreateBy() {
         return createBy;
     }
 
-    public void setCreateBy(Integer createBy) {
-        this.createBy = createBy;
+    public void setCreateBy(String createBy) {
+        this.createBy = createBy == null ? null : createBy.trim();
     }
 
     public Date getCreateDate() {
@@ -54,12 +62,12 @@ public class ArticleComment implements Serializable {
         this.createDate = createDate;
     }
 
-    public Integer getUpdateBy() {
+    public String getUpdateBy() {
         return updateBy;
     }
 
-    public void setUpdateBy(Integer updateBy) {
-        this.updateBy = updateBy;
+    public void setUpdateBy(String updateBy) {
+        this.updateBy = updateBy == null ? null : updateBy.trim();
     }
 
     public Date getUpdateDate() {
@@ -78,14 +86,6 @@ public class ArticleComment implements Serializable {
         this.delFlag = delFlag;
     }
 
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content == null ? null : content.trim();
-    }
-
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -93,13 +93,13 @@ public class ArticleComment implements Serializable {
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
-        sb.append(", articleId=").append(articleId);
+        sb.append(", address=").append(address);
+        sb.append(", method=").append(method);
         sb.append(", createBy=").append(createBy);
         sb.append(", createDate=").append(createDate);
         sb.append(", updateBy=").append(updateBy);
         sb.append(", updateDate=").append(updateDate);
         sb.append(", delFlag=").append(delFlag);
-        sb.append(", content=").append(content);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
