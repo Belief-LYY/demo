@@ -12,9 +12,6 @@
 
 <!-- 配置生成器 -->
 <generatorConfiguration>
-    <!-- classPathEntry标签的location属性指明了mybatis-generator需要额外加载的依赖包 -->
-    <classPathEntry location="C:\Users\ERIC\.m2\repository\mysql\mysql-connector-java\5.1.47\mysql-connector-java-5.1.47.jar"/>
-
     <context id="mysql" targetRuntime="MyBatis3" defaultModelType="flat">
         <!-- 生成的Java文件的编码 -->
         <property name="modelOnly" value="true"/>
@@ -39,10 +36,10 @@
 
         <!-- JDBC连接 -->
         <connectionFactory>
-			<property name="driverClass" value="com.mysql.jdbc.Driver"/>
-			<property name="connectionURL" value="jdbc:mysql://localhost:3308/demo"/>
-			<property name="userId" value="root"/>
-			<property name="password" value="LYY1996*"/>
+            <property name="driverClass" value="com.mysql.jdbc.Driver"/>
+            <property name="connectionURL" value="jdbc:mysql://115.157.195.82:3308/demo"/>
+            <property name="userId" value="root"/>
+            <property name="password" value="LYY1996*"/>
         </connectionFactory>
 
         <!-- Java类型处理器
@@ -95,6 +92,16 @@
         </javaClientGenerator>
 
         <!-- 可以配置多个table，一起运行，完成后建议将其配置为不自动更新/生成实体类 -->
+        <!--<table tableName="user"-->
+        <!--domainObjectName="User"-->
+        <!--enableCountByExample="false"-->
+        <!--enableSelectByExample="false"-->
+        <!--enableUpdateByExample="false"-->
+        <!--enableDeleteByExample="false"-->
+        <!--enableInsert="true"-->
+        <!--enableDeleteByPrimaryKey="true"-->
+        <!--enableSelectByPrimaryKey="true"-->
+        <!--enableUpdateByPrimaryKey="true"/>-->
 
         <table tableName="article"
                domainObjectName="Article"
@@ -117,7 +124,7 @@
                enableDeleteByPrimaryKey="true"
                enableSelectByPrimaryKey="true"
                enableUpdateByPrimaryKey="true"/>
-               
+
         <table tableName="article_comment"
                domainObjectName="ArticleComment"
                enableCountByExample="false"
@@ -129,26 +136,5 @@
                enableSelectByPrimaryKey="true"
                enableUpdateByPrimaryKey="true"/>
 
-        <table tableName="on_channel_http"
-               domainObjectName="ChannelHttp"
-               enableCountByExample="false"
-               enableSelectByExample="false"
-               enableUpdateByExample="false"
-               enableDeleteByExample="false"
-               enableInsert="true"
-               enableDeleteByPrimaryKey="true"
-               enableSelectByPrimaryKey="true"
-               enableUpdateByPrimaryKey="true"/>
-               
-        <table tableName="on_channel_sock"
-               domainObjectName="ChannelSock"
-               enableCountByExample="false"
-               enableSelectByExample="false"
-               enableUpdateByExample="false"
-               enableDeleteByExample="false"
-               enableInsert="true"
-               enableDeleteByPrimaryKey="true"
-               enableSelectByPrimaryKey="true"
-               enableUpdateByPrimaryKey="true"/>
     </context>
 </generatorConfiguration>

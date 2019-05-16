@@ -1,23 +1,23 @@
 package com.example.demo.dao;
 
-import java.util.List;
-
 import com.example.demo.model.User;
 
+import java.util.List;
+
 public interface UserMapper {
-	int deleteByPrimaryKey(Integer id);
+    int deleteByPrimaryKey(Integer id);
 
-	int insert(User record);
+    int insert(User record);
 
-	int insertSelective(User record);
+    int insertSelective(User record);
 
-	User selectByPrimaryKey(Integer id);
+    User selectByPrimaryKey(Integer id);
 
-	int updateByPrimaryKeySelective(User record);
+    int updateByPrimaryKeySelective(User record);
 
-	int updateByPrimaryKey(User record);
+    int updateByPrimaryKey(User record);
 
-	User selectByAccount(String account);
+    User selectByAccount(String account);
 
-	List<User> selectAllUser();
+    List<User> selectAllUser();
 }

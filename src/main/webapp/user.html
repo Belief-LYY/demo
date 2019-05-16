@@ -1,38 +1,41 @@
 <!DOCTYPE html>
 <html lang="zh-cmn-Hans">
 <head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link href="static/images/favicon.png" rel="shortcut icon" type="image/png" />
-	<!-- Latest compiled and minified CSS -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-	<link rel="stylesheet" href="static/css/bootstrap-table.min.css">
-	<link rel="stylesheet" href="static/css/bootstrap-editable.css">
-	<link rel="stylesheet" href="static/css/fileinput.min.css">
-	<link rel="stylesheet" href="static/font-awesome/css/fontawesome.min.css">
-	<link rel="stylesheet" href="static/css/bootstrap-datetimepicker.min.css">
-	<link rel="stylesheet" href="static/css/toastr.min.css">
-	<script type="text/javascript" src="static/js/jquery.min.js"></script>
-	<script type="text/javascript" src="static/js/popper.min.js"></script>
-	<!-- Latest compiled and minified JavaScript -->
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-	<script type="text/javascript" src="static/js/toastr.min.js"></script>
-	<script type="text/javascript" src="static/js/bootstrap-datetimepicker.min.js"></script>
-	<script type="text/javascript" src="static/js/bootstrap-editable.min.js"></script>
-	<script type="text/javascript" src="static/js/bootstrap-table.min.js"></script>
-	<script type="text/javascript" src="static/js/bootstrap-table-editable.min.js"></script>
-	<script type="text/javascript" src="static/js/bootstrap-table-export.min.js"></script>
-	<script type="text/javascript" src="static/js/fileinput.min.js"></script>
-	<script type="text/javascript" src="static/js/template-web.min.js"></script>
-	<script type="text/javascript" src="static/js/table-export.min.js"></script>
-	<script type="text/javascript" src="static/js/xlsx.core.min.js"></script>
-	<script type="text/javascript" src="static/js/i18n/bootstrap-datetimepicker-zh-CN.js"></script>
-	<script type="text/javascript" src="static/js/i18n/bootstrap-fileinput-zh-CN.js"></script>
-	<script type="text/javascript" src="static/js/i18n/bootstrap-table-zh-CN.js"></script>
-	<script type="text/javascript" src="static/font-awesome/js/fontawesome.min.js"></script>
-	<script type="text/javascript" src="static/ckeditor/ckeditor.js"></script>
-	<title>登录</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="static/images/favicon.png" rel="shortcut icon" type="image/png"/>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="static/css/bootstrap-table.min.css">
+    <link rel="stylesheet" href="static/css/bootstrap-editable.css">
+    <link rel="stylesheet" href="static/css/fileinput.min.css">
+    <link rel="stylesheet" href="static/font-awesome/css/fontawesome.min.css">
+    <link rel="stylesheet" href="static/css/bootstrap-datetimepicker.min.css">
+    <link rel="stylesheet" href="static/css/toastr.min.css">
+    <script type="text/javascript" src="static/js/jquery.min.js"></script>
+    <script type="text/javascript" src="static/js/popper.min.js"></script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+    <script type="text/javascript" src="static/js/toastr.min.js"></script>
+    <script type="text/javascript" src="static/js/bootstrap-datetimepicker.min.js"></script>
+    <script type="text/javascript" src="static/js/bootstrap-editable.min.js"></script>
+    <script type="text/javascript" src="static/js/bootstrap-table.min.js"></script>
+    <script type="text/javascript" src="static/js/bootstrap-table-editable.min.js"></script>
+    <script type="text/javascript" src="static/js/bootstrap-table-export.min.js"></script>
+    <script type="text/javascript" src="static/js/fileinput.min.js"></script>
+    <script type="text/javascript" src="static/js/template-web.min.js"></script>
+    <script type="text/javascript" src="static/js/table-export.min.js"></script>
+    <script type="text/javascript" src="static/js/xlsx.core.min.js"></script>
+    <script type="text/javascript" src="static/js/i18n/bootstrap-datetimepicker-zh-CN.js"></script>
+    <script type="text/javascript" src="static/js/i18n/bootstrap-fileinput-zh-CN.js"></script>
+    <script type="text/javascript" src="static/js/i18n/bootstrap-table-zh-CN.js"></script>
+    <script type="text/javascript" src="static/font-awesome/js/fontawesome.min.js"></script>
+    <script type="text/javascript" src="static/ckeditor/ckeditor.js"></script>
+    <title>登录</title>
 </head>
 <body>
 <div class="row">
@@ -41,13 +44,15 @@
             <i class="fa fa-user"></i>&nbsp;&nbsp;用户管理
         </div>
         <div class="panel-body">
-			<div class="row">
-			    <div class="col-lg-12">
-			        <input type="button" style="margin-bottom: -65px; float: none;" class="btn btn-success col-lg-2" value="导入用户表" id="importPoint">
-			        <input type="button" style="margin-bottom: -65px; float: none;" class="btn btn-primary col-lg-2" value="加载用户表">
-			        <table id="table"></table>
-			    </div>
-			</div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <input type="button" style="margin-bottom: -65px; float: none;" class="btn btn-success col-lg-2"
+                           value="导入用户表" id="importPoint">
+                    <input type="button" style="margin-bottom: -65px; float: none;" class="btn btn-primary col-lg-2"
+                           value="加载用户表">
+                    <table id="table"></table>
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -66,7 +71,8 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button id="upload" disabled tabindex="500" title="Upload selected files" class="btn btn-default fileinput-upload fileinput-upload-button">
+                <button id="upload" disabled tabindex="500" title="Upload selected files"
+                        class="btn btn-default fileinput-upload fileinput-upload-button">
                     <i class="glyphicon glyphicon-upload"></i>
                     <span class="hidden-xs">上传</span>
                 </button>
@@ -102,12 +108,12 @@
         $("#upload").attr('disabled', true);
     });
 
-    $('#fileinput').change(function(evt) {
+    $('#fileinput').change(function (evt) {
         var files = evt.target.files;
 
         var fileReader = new FileReader();
 
-        fileReader.onload = function(ev) {
+        fileReader.onload = function (ev) {
             var Excel;
             JsonExcel = [];
             try {
@@ -124,9 +130,9 @@
             }
 
             console.log(JsonExcel);
-            if(JsonExcel.length > 0 && files[0].name.endWith('.xlsx')){
+            if (JsonExcel.length > 0 && files[0].name.endWith('.xlsx')) {
                 $("#upload").attr('disabled', false);
-            }else{
+            } else {
                 $("#upload").attr('disabled', true);
             }
         };
@@ -147,17 +153,18 @@
         autoReplace: true,
         showUpload: false,
         allowedFileExtensions: ['xlsx'],
-        layoutTemplates:{
-            actionDelete:'',
-            actionUpload:''
+        layoutTemplates: {
+            actionDelete: '',
+            actionUpload: ''
         },
-    }).on('fileclear', function(event) {
+    }).on('fileclear', function (event) {
         $("#upload").attr('disabled', true);
-    });;
+    });
+    ;
 
     $('#table').bootstrapTable({
         locale: 'zh-CN',
-        url: "/demo/user",
+        url: "/user",
         method: "get",
         contentType: "application/json; charset=utf-8",
         pagination: true,
@@ -166,7 +173,7 @@
         showColumns: true,
         showExport: true,
         exportDataType: 'all',
-        exportTypes: [ 'json', 'xml', 'png', 'csv', 'txt', 'sql', 'doc', 'excel', 'xlsx', 'pdf'],
+        exportTypes: ['json', 'xml', 'png', 'csv', 'txt', 'sql', 'doc', 'excel', 'xlsx', 'pdf'],
         columns: [
             {
                 field: 'id',
@@ -232,13 +239,13 @@
                 align: 'center',
                 valign: 'middle',
                 formatter: function (value, row, index) {
-                    return "<a href='#' class='btn btn-xs red' onclick=\"DeleteById(" + row.id +  ")\" title='删除'><span class='glyphicon glyphicon-remove'></span></a>";
+                    return "<a href='#' class='btn btn-xs red' onclick=\"DeleteById(" + row.id + ")\" title='删除'><span class='glyphicon glyphicon-remove'></span></a>";
                 }
             }
         ],
         onEditableSave: function (field, row, oldValue, $el) {
             $.ajax({
-                url: "/demo/user",
+                url: "/user",
                 method: "put",
                 contentType: "application/json; charset=utf-8",
                 data: JSON.stringify(row),
@@ -251,7 +258,7 @@
 
     function DeleteById(target) {
         $.ajax({
-            url: "/demo/user",
+            url: "/user",
             method: "delete",
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify({

@@ -4,21 +4,14 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class ArticleType implements Serializable {
-    private Integer id;
-
-    private String type;
-
-    private Integer createBy;
-
-    private Date createDate;
-
-    private Integer updateBy;
-
-    private Date updateDate;
-
-    private Boolean delFlag;
-
     private static final long serialVersionUID = 1L;
+    private Integer id;
+    private String type;
+    private Integer createBy;
+    private Date createDate;
+    private Integer updateBy;
+    private Date updateDate;
+    private Boolean delFlag;
 
     public Integer getId() {
         return id;
